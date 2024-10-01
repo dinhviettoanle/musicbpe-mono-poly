@@ -1,0 +1,34 @@
+# tokenizer
+TokenizerClass: REMIVelocityMute
+nb_velocities: 1
+
+# data
+chunk_size: 512 ## for polyphonic only
+chunk_when: 'after'
+
+# experiment
+task: 'clfdata'
+bpe: True
+bpe_merges: 4096 # 10240 # 12288 # 16384 # 20480 #32768
+bpe_savepath: 'bpe_tokenizers/REMIVelocityMute_{}_mtcpiano.bpe'
+sanity: False
+sanity_split_frq: null
+
+# training
+device: cuda:2
+parallel_devices: null
+epochs: 100
+lr: 1.0e-4
+batch_size: 16
+
+model_base: BERT # GPT2
+hidden_size: 128
+num_hidden_layers: 2
+num_attention_heads: 8
+max_position_embeddings: 512
+
+early_stopping_patience: null
+checkpoint_frequency: 10
+
+train_steps: null
+val_steps: null

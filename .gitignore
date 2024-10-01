@@ -1,0 +1,10 @@
+corpus/essen_phrases
+corpus/mtc_piano_type0
+
+results/compare_text_music
+results/*.pickle
+plot_data/*.csv
+figures/*.pdf
+
+**/*.bpe
+**/*.pyc
