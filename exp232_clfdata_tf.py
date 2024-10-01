@@ -35,7 +35,7 @@ seed_model = 42
 
 PATH_CKPT = "/mnt/nfs_share_magnet2/ldinhvie/tokenization_models"
 
-FOLDER_MIDI = "corpus/_mtc_piano_type0"
+FOLDER_MIDI = "corpus/mtc_piano_type0"
 FEATURE_FILE = 'corpus/essen_phrases/MTC-FS-INST-2.0_sequences-1.1.jsonl.gz'
 SAVE_PRECOMPUTED_DATA = 'mtc_piano_clfdata_{}_bpe{}_chunk{}.feather'
 
@@ -261,7 +261,10 @@ def prepare_data_polyphonic(tokenizer, tokenizer_name, TokenizerClass, config, p
         df_token_phrase.to_feather(SAVE_PRECOMPUTED_DATA.format(tokenizer_name, bpe_merges, config['chunk_when']))
     else:
         print("[info] Loading from", SAVE_PRECOMPUTED_DATA.format(tokenizer_name, bpe_merges, config['chunk_when']))
-        df_token_phrase = pd.read_feather(SAVE_PRECOMPUTED_DATA.format(tokenizer_name, bpe_merges, config['chunk_when']))
+        try:
+            df_token_phrase = pd.read_feather(SAVE_PRECOMPUTED_DATA.format(tokenizer_name, bpe_merges, config['chunk_when']))
+        except FileNotFoundError as e:
+            raise FileNotFoundError(e, "Have you run --precompute_data?")
     
     print("Checking NonBPE column")
     check_balanced_accuracy(df_token_phrase, column_start_of_phrase='start_of_phrase_nonbpe')

@@ -14,7 +14,7 @@ sanity: False
 sanity_split_frq: null
 
 # training
-device: cuda:2
+device: cuda:0
 parallel_devices: null
 epochs: 100
 lr: 1.0e-4

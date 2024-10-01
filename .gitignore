@@ -1,5 +1,6 @@
 corpus/essen_phrases
 corpus/mtc_piano_type0
+corpus/mtc
 
 results/compare_text_music
 results/*.pickle
@@ -8,3 +9,5 @@ figures/*.pdf
 
 **/*.bpe
 **/*.pyc
+
+**/*.feather

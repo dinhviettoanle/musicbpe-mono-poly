@@ -8,13 +8,13 @@ chunk_size: 512 ## for polyphonic only
 # experiment
 task: 'clfdata'
 bpe: True
-bpe_merges: 128000
+bpe_merges: 4096
 bpe_savepath: 'bpe_tokenizers/REMIVelocityMute_{}_mtcmono.bpe'
 sanity: False
 sanity_split_frq: null
 
 # training
-device: cuda:3
+device: cuda:0
 parallel_devices: null
 epochs: 100
 lr: 1.0e-4

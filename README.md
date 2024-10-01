@@ -24,10 +24,66 @@ pip install --no-deps -r requirements.txt
 ```
 
 ## Use pre-compute data
-Run notebook `figures_paper.ipynb`
+1. Download pre-computed data
+2. Put data:
+XXX
+3. Run notebook `figures_paper.ipynb`
 
 ## Training
-Coming soon...
+
+### BPE tokenizers
+TODO
+
+
+### Musical phrase detection
+#### Monophonic
+Use:
+```
+python exp231_clfdata_tf.py --config=<config_file>
+```
+
+Required:
+- Pre-trained BPE tokenizer (according to the `bpe_savepath` field in the config file.)
+
+Options:
+- `--precompute_data`: builds pre-computed data `mtc_clfdata_<TokenizerName>_bpe<NumBPE>.feather`
+- `--seed_split=<int>`
+
+**No BPE**
+```
+python exp231_clfdata_tf.py --config=config/clfdata_transformers_withbpe.yaml
+```
+
+**With BPE**
+```
+python exp231_clfdata_tf.py --config=config/clfdata_transformers_withbpe.yaml
+```
+
+
+#### Polyphonic
+
+Use:
+```
+python exp232_clfdata_tf.py --config=<config_file>
+```
+
+Required:
+- Pre-trained BPE tokenizer (according to the `bpe_savepath` field in the config file.)
+
+Options:
+- `--precompute_data`: builds pre-computed data `mtc_piano_clfdata_<TokenizerName>_bpe<NumBPE>_chunkafter.feather`
+- `--seed_split=<int>`
+
+**No BPE**
+```
+python exp231_clfdata_tf.py --config=config/clfdata_piano_transformers_nobpe.yaml
+```
+
+**With BPE**
+```
+python exp232_clfdata_tf.py --config=config/clfdata_piano_transformers_withbpe.yaml
+```
+
 
 ## Evaluation
-Coming soon...
+TODO
