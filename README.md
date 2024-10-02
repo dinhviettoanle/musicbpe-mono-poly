@@ -23,11 +23,14 @@ Install requirements:
 pip install --no-deps -r requirements.txt
 ```
 
-## Use pre-compute data
-1. Download pre-computed data at XXX
-2. Put data:
-XXX
-3. Run notebook `figures_paper.ipynb`
+## Reproduce figures from pre-computed data
+1. Download pre-computed data and models [here](XXX)
+2. Data content:
+- `exp231_save` and `exp232_save`: Pretrained models for phrase segmentation (Figure 3). To put in your preferred directory (modify `model_path_231` and `model_path_232` for phrase segmentation performances in `figures_paper.ipynb`).
+- `corpus`: raw MIDI files, phrase segmentation annotations. To put in `./corpus`.
+- `bpe_tokenizers`: pre-trained BPE tokenizers. To put in `./bpe_tokenizers`.
+- `results`: pre-computed data for text-BPE vs. music-BPE (Figure 1) and supertokens with pitches (Figure 4). To put in `./results`.
+3. Run notebook `figures_paper.ipynb` 
 
 ## Training
 
@@ -65,12 +68,12 @@ Options:
 - `--precompute_data`: builds pre-computed data `mtc_clfdata_<TokenizerName>_bpe<NumBPE>.feather`
 - `--seed_split=<int>`
 
-**No BPE**
+*No BPE*
 ```
 python exp231_clfdata_tf.py --config=config/clfdata_transformers_withbpe.yaml
 ```
 
-**With BPE**
+*With BPE*
 ```
 python exp231_clfdata_tf.py --config=config/clfdata_transformers_withbpe.yaml
 ```
@@ -93,12 +96,12 @@ Options:
 - `--precompute_data`: builds pre-computed data `mtc_piano_clfdata_<TokenizerName>_bpe<NumBPE>_chunkafter.feather`
 - `--seed_split=<int>`
 
-**No BPE**
+*No BPE*
 ```
 python exp232_clfdata_tf.py --config=config/clfdata_piano_transformers_nobpe.yaml
 ```
 
-**With BPE**
+*With BPE*
 ```
 python exp232_clfdata_tf.py --config=config/clfdata_piano_transformers_withbpe.yaml
 ```
