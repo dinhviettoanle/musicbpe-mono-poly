@@ -48,7 +48,7 @@ Outputs:
 Options:
 - `--tokenizer_init=<InitialTokenizer>`: start from an already trained BPE tokenizer. If none, start from the initial vocabulary.
 - `--output_file=<OutputFilename>` : output filename (default: `train.bpe`)
-- `--bypass_tokenize` : bypass the tokenization step before BPE (i.e. the path `'data_tokenized/{TokenizerName}/{corpus}/train'` already exists), because it can be very long for several trainings... Warning if used with `--tokenizer_init`, make sure that it has been tokenized with THIS initial tokenizer.
+- `--bypass_tokenize` : bypass the tokenization step before BPE (i.e. the path `'data_tokenized/{TokenizerName}/{Corpus}/train'` already exists), because it can be very long for several trainings... Warning if used with `--tokenizer_init`, make sure that it has been tokenized with THIS initial tokenizer.
 
 ### Musical phrase detection
 
@@ -108,4 +108,22 @@ python exp232_clfdata_tf.py --config=config/clfdata_piano_transformers_withbpe.y
 
 
 ## Evaluation
-TODO
+
+Required:
+- Trained models for phrase segmentation. In particular, only the `best_loss.pt` model (trained by `exp231_clfdata_tf.py` or `exp232_clfdata_tf.py`) is evaluated.
+- Pre-computed data with the correct number of BPE merges (ex: `mtc_clfdata_REMIVelocityMute_bpe4096.feather`) in the current folder.
+
+Outputs:
+- `perfo.json` created in the checkpoint folder.
+
+The same scripts can be used to evaluate both BPE and non-BPE models.
+
+### Monophonic
+```
+python exp231_clfdata_evaluate.py <CheckpointFolder> (cuda:<device_number> optional)
+```
+
+### Polyphonic
+```
+python exp232_clfdata_evaluate.py <CheckpointFolder> (cuda:<device_number> optional)
+```

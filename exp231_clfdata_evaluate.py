@@ -167,9 +167,9 @@ print(metrics.classification_report(y_true=true_labels, y_pred=predictions, labe
 pprint.pprint(dict_perfo)
 
 
-# out_perfo_path = os.path.join(ckpt_path, 'perfo.json')
-# with open(out_perfo_path, 'w') as fp:
-#     json.dump(dict_perfo, fp, indent=2)
+out_perfo_path = os.path.join(ckpt_path, 'perfo.json')
+with open(out_perfo_path, 'w') as fp:
+    json.dump(dict_perfo, fp, indent=2)
     
 
 # bpe_or_not = 'bpe' if config['bpe'] else 'nobpe'

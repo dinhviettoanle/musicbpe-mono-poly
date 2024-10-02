@@ -174,19 +174,19 @@ with open(out_perfo_path, 'w') as fp:
     json.dump(dict_perfo, fp, indent=2)
     
     
-bpe_or_not = 'bpe' if config['bpe'] else 'nobpe'
-after_or_not = ''
-if config['bpe']:
-    after_or_not = f"_{config['chunk_when']}"
+# bpe_or_not = 'bpe' if config['bpe'] else 'nobpe'
+# after_or_not = ''
+# if config['bpe']:
+#     after_or_not = f"_{config['chunk_when']}"
     
-torch.save({
-    'ckpt': ckpt_path,
-    'chunk_when': config['chunk_when'],
-    'n_merges': config['bpe_merges'],
-    'seed_split': config['seed_split'],
-    'preds': all_preds,
-    'targets': all_true_labels
-}, f"verif_232clf_{bpe_or_not}{after_or_not}.pt")
+# torch.save({
+#     'ckpt': ckpt_path,
+#     'chunk_when': config['chunk_when'],
+#     'n_merges': config['bpe_merges'],
+#     'seed_split': config['seed_split'],
+#     'preds': all_preds,
+#     'targets': all_true_labels
+# }, f"verif_232clf_{bpe_or_not}{after_or_not}.pt")
 
 
 
