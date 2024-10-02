@@ -3,9 +3,9 @@ Phrase segmentation utils functions
 (mainly polyphonic - for monophonic, look at notebooks/experiment_211_231.ipynb)
 """
 from pathlib import Path
-from miditoolkit import MidiFile
 import numpy as np
 import pandas as pd
+import torch
 from tqdm.auto import tqdm
 import time
 import pprint
@@ -13,12 +13,11 @@ pp = pprint.PrettyPrinter(width=20)
 
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.metrics import classification_report, f1_score, accuracy_score, matthews_corrcoef, balanced_accuracy_score
-from torch.utils.data import Dataset, DataLoader, TensorDataset, random_split
+from torch.utils.data import random_split
 import sklearn.metrics as metrics
 
 
-from .utils import *
-from .constants import *
+from .utils import print_tokens, tokens_to_bow
 from .tokenizer import *
 
 

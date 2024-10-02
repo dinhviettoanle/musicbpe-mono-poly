@@ -1,13 +1,10 @@
 """
 General utils functions
 """
-from importlib.metadata import version
 from tqdm.auto import tqdm
 from pathlib import Path
 import os
-import shutil
 import json
-import torch
 from miditoolkit import MidiFile
 import pandas as pd
 import numpy as np
@@ -17,7 +14,6 @@ from functools import partial
 import time
 from concurrent.futures import ProcessPoolExecutor
 import rich
-from rich import progress
 
 from .miditok import REMI, Octuple, Structured, CPWord, MIDILike
 
@@ -25,7 +21,6 @@ from .miditok import REMI, Octuple, Structured, CPWord, MIDILike
 NOTES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 OCTAVES = list(range(11))
 NOTES_IN_OCTAVE = len(NOTES)
-MIDI_MAX = 100
 
 DEFAULT_SEED = 42
 
@@ -43,8 +38,8 @@ def number_to_note(number: int) -> str:
         String representation of the note
     """
     octave = number // NOTES_IN_OCTAVE
-    assert octave in OCTAVES, errors['notes']
-    assert 0 <= number <= 127, errors['notes']
+    assert octave in OCTAVES, "Octave not in OCTAVES"
+    assert 0 <= number <= 127, "MIDI number out of range"
     note = NOTES[number % NOTES_IN_OCTAVE]
     return f'{note}{octave}'
 
@@ -332,7 +327,7 @@ def count_tokens_corpus(list_genres, tokenizer, folder_corpus='folk_norm', force
 
 
 
-def make_reduced_dataset(df_genre_count, list_considered_genres, lim, COPY_FILES=True, seed=DEFAULT_SEED, VERBOSE=True):
+def make_reduced_dataset(df_genre_count, list_considered_genres, lim, seed=DEFAULT_SEED, VERBOSE=True):
     """Reduces the dataset to make it balanced
 
     Parameters
@@ -343,8 +338,6 @@ def make_reduced_dataset(df_genre_count, list_considered_genres, lim, COPY_FILES
         List of considered genres
     lim : int
         Limit of tokens in each genre
-    COPY_FILES : bool, optional
-        Copy files in a new folder, by default True
     seed : int, optional
         Seed to randomly chose pieces, by default DEFAULT_SEED
     VERBOSE : bool, optional

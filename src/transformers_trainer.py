@@ -6,7 +6,6 @@ from tqdm.auto import tqdm
 import torch.optim as optim
 import torch.nn as nn 
 from torch.utils.tensorboard import SummaryWriter
-from .constants import *
 from pathlib import Path
 import sklearn.metrics as metrics
 
