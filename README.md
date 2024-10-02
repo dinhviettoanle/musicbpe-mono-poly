@@ -24,18 +24,31 @@ pip install --no-deps -r requirements.txt
 ```
 
 ## Use pre-compute data
-1. Download pre-computed data
+1. Download pre-computed data at XXX
 2. Put data:
 XXX
 3. Run notebook `figures_paper.ipynb`
 
 ## Training
 
-### BPE tokenizers
-TODO
+### BPE tokenizer
+Use:
+```
+python train_bpe.py --corpus=<poly|mono> --n_merges=<int> 
+```
 
+Outputs:
+- `train.bpe`: Pre-trained BPE tokenizer
+- `train.bpe.frq`: Supertoken frequency (for Figure 1) 
+
+
+Options:
+- `--tokenizer_init=<InitialTokenizer>`: start from an already trained BPE tokenizer. If none, start from the initial vocabulary.
+- `--output_file=<OutputFilename>` : output filename (default: `train.bpe`)
+- `--bypass_tokenize` : bypass the tokenization step before BPE (i.e. the path `'data_tokenized/{TokenizerName}/{corpus}/train'` already exists), because it can be very long for several trainings... Warning if used with `--tokenizer_init`, make sure that it has been tokenized with THIS initial tokenizer.
 
 ### Musical phrase detection
+
 #### Monophonic
 Use:
 ```
@@ -44,6 +57,9 @@ python exp231_clfdata_tf.py --config=<config_file>
 
 Required:
 - Pre-trained BPE tokenizer (according to the `bpe_savepath` field in the config file.)
+
+Outputs:
+- Trained models saved at `PATH_CKPT` (defined in `exp231_clfdata_tf.py`)
 
 Options:
 - `--precompute_data`: builds pre-computed data `mtc_clfdata_<TokenizerName>_bpe<NumBPE>.feather`
@@ -70,13 +86,16 @@ python exp232_clfdata_tf.py --config=<config_file>
 Required:
 - Pre-trained BPE tokenizer (according to the `bpe_savepath` field in the config file.)
 
+Outputs:
+- Trained models saved at `PATH_CKPT` (defined in `exp232_clfdata_tf.py`)
+
 Options:
 - `--precompute_data`: builds pre-computed data `mtc_piano_clfdata_<TokenizerName>_bpe<NumBPE>_chunkafter.feather`
 - `--seed_split=<int>`
 
 **No BPE**
 ```
-python exp231_clfdata_tf.py --config=config/clfdata_piano_transformers_nobpe.yaml
+python exp232_clfdata_tf.py --config=config/clfdata_piano_transformers_nobpe.yaml
 ```
 
 **With BPE**

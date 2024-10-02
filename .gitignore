@@ -8,6 +8,9 @@ plot_data/*.csv
 figures/*.pdf
 
 **/*.bpe
+**/*.bpe.frq
 **/*.pyc
 
 **/*.feather
+
+data*/
